@@ -39,10 +39,7 @@ var GulpRequirejsGenerator = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (answers) {
 		var features = answers.features;
-		function hasFeature(feat) {
-			return features.indexOf(feat) !== -1;
-		}
-		this.includeModernizr = hasFeature('includeModernizr');
+		this.includeModernizr = features;
 		done();
     }.bind(this));
   },
