@@ -1,0 +1,52 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# @see editorconfig.org
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+root = true
+
+[*]
+indent_style = tab
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.rst]
+trim_trailing_whitespace = false
+
+[*.diff]
+trim_trailing_whitespace = false
+
+[*.py]
+indent_style = tab
+
+[*.as]
+indent_style = tab
+
+[*.html]
+indent_style = tab
+
+[*.css]
+indent_style = tab
+
+[*.js]
+indent_style = tab
+
+[*.json]
+indent_style = tab
+
+[*.xml]
+indent_style = tab
+
+[static/scripts/vendor/**.js]
+indent_style = space
+indent_size = 2
+
+[{package.json,.travis.yml,static/bower.json}]
+indent_style = space
+indent_size = 2

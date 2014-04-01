@@ -1,0 +1,16 @@
+/* TEAM */
+	Your title: Your name.
+	Site: email, link to a contact form, etc.
+	Twitter: your Twitter username.
+
+/* THANKS */
+	Project template: <%= appname %>
+	Contact: your_email [at] gmail.com
+	Twitter: @yourtwitteruser
+
+/* SITE */
+	Last update: YYYY/MM/DD
+	Language:
+	Components:
+	Doctype:
+	Software:

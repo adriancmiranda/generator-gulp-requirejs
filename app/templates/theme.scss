@@ -1,0 +1,21 @@
+//|**
+//|
+//| <%= appname %>
+//|
+//| This file is the main stylesheet theme
+//|
+//| .--------------------------------------------------------------.
+//| | NAMING CONVENTIONS:                                          |
+//| |--------------------------------------------------------------|
+//| | Modules/Blocks and variables    | compound-words             |
+//| |--------------------------------------------------------------|
+//| | Components/Elements             | __double-underscore-prefix |
+//| |--------------------------------------------------------------|
+//| | Modifiers                       | --double-hyphen-prefix     |
+//| '--------------------------------------------------------------'
+//|
+//'*/
+@import "theme/base";
+@import "theme/states";
+@import "theme/layout";
+@import "theme/modules";
