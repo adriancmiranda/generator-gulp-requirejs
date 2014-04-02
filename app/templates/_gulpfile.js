@@ -82,8 +82,8 @@
 		$.requirejs({
 			baseUrl: _.app + '/scripts',
 			optimize: 'none',
-			include: ['requirejs', 'boot'],
-			mainConfigFile: _.app + '/scripts/boot.js',
+			include: ['requirejs', 'config'],
+			mainConfigFile: _.app + '/scripts/config.js',
 			out: 'body.min.js',
 			preserveLicenseComments: false,
 			generateSourceMaps: true,
