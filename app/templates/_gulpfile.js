@@ -2,7 +2,7 @@
 	'use strict';
 	//|**
 	//|
-	//| <%= appname %>
+	//| Gulpfile
 	//|
 	//| This file is the streaming build system
 	//|
