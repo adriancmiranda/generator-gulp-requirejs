@@ -44,7 +44,7 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## License
 
-MIT
+[MIT][license]
 
 [travis_build_status_image]: https://travis-ci.org/adriancmiranda/generator-gulp-requirejs.png?branch=master
 [travis_build_status_url]: https://travis-ci.org/adriancmiranda/generator-gulp-requirejs "build status"
@@ -54,3 +54,5 @@ MIT
 
 [david_devdependencies_status_image]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs/dev-status.png?theme=shields.io
 [david_devdependencies_status_url]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs#info=devDependencies "devDependencies status"
+
+[license]: https://github.com/adriancmiranda/generator-gulp-requirejs/blob/master/LICENSE "LICENSE"
