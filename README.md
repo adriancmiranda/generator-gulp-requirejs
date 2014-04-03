@@ -1,4 +1,4 @@
-# generator-gulp-requirejs [![Build Status][travis_build_status_image]][travis_build_status_url]
+# generator-gulp-requirejs [![Build Status](https://secure.travis-ci.org/adriancmiranda/generator-gulp-requirejs.png?branch=master)](https://travis-ci.org/adriancmiranda/generator-gulp-requirejs)
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -44,15 +44,4 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## License
 
-[MIT][license]
-
-[travis_build_status_image]: https://travis-ci.org/adriancmiranda/generator-gulp-requirejs.png?branch=master
-[travis_build_status_url]: https://travis-ci.org/adriancmiranda/generator-gulp-requirejs "build status"
-
-[david_dependencies_status_image]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs.png?theme=shields.io
-[david_dependencies_status_url]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs "dependencies status"
-
-[david_devdependencies_status_image]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs/dev-status.png?theme=shields.io
-[david_devdependencies_status_url]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs#info=devDependencies "devDependencies status"
-
-[license]: https://github.com/adriancmiranda/generator-gulp-requirejs/blob/master/LICENSE "LICENSE"
+MIT
