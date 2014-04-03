@@ -264,10 +264,10 @@
 		$.shelljs.exec('open http://localhost:9000');
 	});
 	gulp.task('development', function() {
-		$.shelljs.exec('open http://amproject.herokuapp.com/');
+		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
 	});
 	gulp.task('staging', function() {
-		$.shelljs.exec('open https://amproject.herokuapp.com/');
+		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
