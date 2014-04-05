@@ -271,6 +271,9 @@
 	gulp.task('staging', function() {
 		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
 	});
+	gulp.task('production', function() {
+		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
+	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| alias
