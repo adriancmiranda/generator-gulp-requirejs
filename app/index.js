@@ -66,6 +66,7 @@ var GulpRequirejsGenerator = yeoman.generators.Base.extend({
     this.copy('jshintrc', '.jshintrc');
     this.copy('jscs.json', '.jscs.json');
     this.copy('bowerrc', '.bowerrc');
+    this.copy('config.rb', 'config.rb');
     this.copy('config.js', 'app/scripts/config.js');
     this.copy('scope.js', 'app/scripts/scope.js');
     this.copy('app.js', 'app/scripts/app.js');
