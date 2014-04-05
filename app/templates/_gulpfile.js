@@ -162,7 +162,7 @@
 			style: 'expanded',
 			lineNumbers: true,
 			sourcemap: true,
-			compass: false,
+			compass: false, // only work's with sass (3.2.18)
 			trace: true
 		}).on('error', $.util.log))
 		.pipe($.autoprefixer('last 1 version', '> 1%', 'ie 8'))
