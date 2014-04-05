@@ -193,9 +193,9 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| connect - (connect)
+	//| server - (connect)
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('connect', $.connect.server({
+	gulp.task('server', $.connect.server({
 		root: [_.app],
 		livereload: true,
 		port: 9000
@@ -204,13 +204,14 @@
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| watch - (watch)
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('watch', ['connect'], function() {
+	gulp.task('watch', ['server'], function() {
 		// Watch for changes in `app` dir
 		gulp.src([
+			_.app + '/**/*.{png,jpg,jpeg,gif,ico}',
+			_.app + '/scripts/**/*.js',
 			_.app + '/*.css',
 			_.app + '/fonts/**/*',
-			_.app + '/scripts/**/*.js',
-			_.app + '/**/*.{png,jpg,jpeg,gif,ico}'
+			_.app + '/*.html'
 		], { read: false }).pipe($.watch({}, function(files) {
 			return files;
 		})).pipe($.plumber());
