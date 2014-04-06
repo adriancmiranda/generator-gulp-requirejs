@@ -26,21 +26,29 @@ module.exports = GulpRequirejsGenerator = yeoman.generators.Base.extend({
 		// replace it with a short and sweet description of your generator
 		this.log(chalk.magenta('You\'re using the fantastic Gulp\\RequireJS generator.'));
 
-		var prompts = [{
-			type: 'checkbox',
-			name: 'features',
-			message: 'What more would you like?',
-			default: true,
-			choices: [{
-				name: 'Modernizr',
-				value: 'includeModernizr',
-				checked: true
-			}]
-		}];
+		var prompts = [
+			{
+				type: 'checkbox',
+				name: 'features',
+				message: 'What more would you like?',
+				default: true,
+				choices: [
+					{
+						name: 'Modernizr',
+						value: 'includeModernizr',
+						checked: true
+					}
+				]
+			}
+		];
+		
+		this.hasFeature = function (list, feat) {
+			return list.indexOf(feat) !== -1;
+		};
 
 		this.prompt(prompts, function (props) {
 			var features = props.features;
-			this.includeModernizr = features;
+			this.includeModernizr = this.hasFeature(features, 'includeModernizr');
 			done();
 		}.bind(this));
 	},
