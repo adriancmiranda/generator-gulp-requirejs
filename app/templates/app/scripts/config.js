@@ -22,12 +22,12 @@
 //|
 //'*/
 require.config({
-    deps: ['app'],
-    waitSeconds: 45,
-    paths: {
-        requirejs: 'vendor/requirejs/require',
-        sizzle: 'vendor/sizzle/dist/sizzle'
-    },
-    shim: {
-    }
+	deps: ['application'],
+	waitSeconds: 45,
+	paths: {
+		requirejs: 'vendor/requirejs/require',
+		jquery: 'vendor/jquery/dist/jquery'
+	},
+	shim: {
+	}
 });

@@ -1,16 +1,16 @@
 {
-  "name": "package",
-  "version": "0.0.1",
+  "name": "<%= _.slugify(appname) %>",
+  "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "requirejs": "~2.1.11",
-    "modernizr": "~2.6.2",
-    "sizzle": "~1.10.18"
+    "requirejs": "~2.1.11",<% if (includeModernizr) { %>
+    "modernizr": "~2.6.2",<% } %>
+    "jquery": "~2.1.0"
   },
   "devDependencies": {},
   "ignore": [
-    "app/scripts/vendors",
+    "app/scripts/vendor",
     "node_modules",
     "tests",
     "test",

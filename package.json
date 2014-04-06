@@ -1,7 +1,7 @@
 {
   "name": "generator-gulp-requirejs",
-  "version": "0.0.3",
-  "description": "Yeoman generator",
+  "version": "0.0.4",
+  "description": "Scaffold out a front-end web app using RequireJS",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "adriancmiranda/generator-gulp-requirejs",
@@ -11,7 +11,8 @@
     "url": "https://github.com/adriancmiranda"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "npm": ">=1.2.10"
   },
   "scripts": {
     "test": "mocha"
@@ -20,7 +21,14 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "web",
+    "app",
+    "front-end",
+    "requirejs",
+    "modernizr",
+    "jquery",
+    "gulp"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
@@ -30,6 +38,8 @@
     "mocha": "*"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0"
+    "yo": ">=1.0.0",
+    "generator-mocha": ">=0.1.0",
+    "gulp": ">=3.5.0"
   }
 }

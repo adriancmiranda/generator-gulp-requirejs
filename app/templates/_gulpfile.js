@@ -4,7 +4,8 @@
 	//|
 	//| Gulpfile
 	//|
-	//| This file is the streaming build system
+	//| This file is the streaming build system generated on <%= (new Date).toISOString().split('T')[0] %>
+	//| using <%= pkg.name %> <%= pkg.version %>
 	//|
 	//| .--------------------------------------------------------------.
 	//| | NAMING CONVENTIONS:                                          |
@@ -32,14 +33,7 @@
 		_ = { app: 'app', dist: 'dist' };
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| test - (mocha)
-	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('mocha', function() {
-		gulp.src('test/*.js').pipe($.mocha({ reporter: 'list' }));
-	});
-
-	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| jsonlint - (plumber, jshint, jscs)
+	//| ✓ jsonlint
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('jsonlint', function() {
 		return gulp.src([
@@ -48,8 +42,10 @@
 			'.bowerrc',
 			'.jshintrc',
 			'.jscs.json'
-		]).pipe($.jsonlint()).pipe($.jsonlint.reporter()).pipe($.notify({
-			message: '<%= options.date %> ✓ json: <%= file.relative %>',
+		])
+		.pipe($.jsonlint()).pipe($.jsonlint.reporter())
+		.pipe($.notify({
+			message: '<%= options.date %> ✓ lint: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -57,18 +53,19 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| lint - (plumber, jshint, jscs)
+	//| ✓ jshint
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('lint', ['jsonlint'], function() {
+	gulp.task('jshint', function() {
 		return gulp.src([
 			'gulpfile.js',
 			_.app + '/scripts/**/*.js',
-			'!' + _.app + '/scripts/vendor/**/*.js'
+			'!' + _.app + '/scripts/vendor/**/*.js',
+			'test/spec/{,*/}*.js'
 		])
-		.pipe($.plumber()).pipe($.jshint('.jshintrc'))
-		.pipe($.jshint.reporter('default'))
-		.pipe($.jscs()).pipe($.notify({
-			message: '<%= options.date %> ✓ script: <%= file.relative %>',
+		.pipe($.jshint('.jshintrc')).pipe($.jshint.reporter('default'))
+		.pipe($.jscs())
+		.pipe($.notify({
+			message: '<%= options.date %> ✓ hint: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -76,23 +73,41 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| require - (plumber, size, notify)
+	//| ✓ mocha
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('require', ['lint'], function() {
+	gulp.task('mocha', function() {
+		return gulp.src('test/*.js').pipe($.mocha({ reporter: 'list' }));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ requirejs
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('requirejs', ['jshint'], function() {
 		$.requirejs({
 			baseUrl: _.app + '/scripts',
 			optimize: 'none',
 			include: ['requirejs', 'config'],
 			mainConfigFile: _.app + '/scripts/config.js',
-			out: 'body.min.js',
-			preserveLicenseComments: false,
-			generateSourceMaps: true,
+			out: 'body.js',
+			preserveLicenseComments: true,
 			useStrict: true,
 			wrap: true
-		})
-		.pipe($.plumber())
-		.pipe(gulp.dest(_.dist + '/scripts'))
-		.pipe($.size()).pipe($.notify({
+		}).pipe(gulp.dest(_.dist + '/scripts')).pipe($.size()).pipe($.notify({
+			message: '<%= options.date %> ✓ require: <%= file.relative %>',
+			templateOptions: {
+				date: new Date()
+			}
+		}));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ scripts
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('scripts', ['jshint', 'requirejs'], function() {
+		return gulp.src([
+			_.app + '/scripts/**/*.js',
+			'!' + _.app + '/scripts/vendor/**/*.js'
+		]).pipe($.size()).pipe($.notify({
 			message: '<%= options.date %> ✓ script: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
@@ -101,72 +116,17 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| scripts - (plumber, concat, uglify, size, notify)
+	//| ✓ styles
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('scripts', ['lint'], function() {
-		return gulp.src([
-			_.app + '/scripts/vendor/modernizr/modernizr.js'
-		])
-		.pipe($.plumber())
-		.pipe($.concat('header.min.js')).pipe($.uglify())
-		.pipe(gulp.dest(_.dist + '/scripts'))
-		.pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ script: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
-	});
-
-	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| svg - (svgmin)
-	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('svg', function() {
-		return gulp.src(_.app + '/*.svg')
-		.pipe($.svgmin([{ removeDoctype: false }, { removeComments: false }]))
-		.pipe(gulp.dest(_.dist)).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ svg: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
-	});
-
-	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| images - (cache, imagemin, size, notify)
-	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('images', ['svg'], function() {
-		return gulp.src([
-			_.app + '/*.{png,jpg,jpeg,gif,ico}',
-			_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}'
-		]).pipe($.cache($.imagemin({
-			optimizationLevel: 3,
-			progressive: true,
-			interlaced: true
-		}))).pipe(gulp.dest(_.dist)).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ image: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
-	});
-
-	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| theme - (plumber, rubySass, util, autoprefixer, size, notify)
-	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('theme', function() {
-		return gulp.src(_.app + '/theme.scss')
-		.pipe($.plumber()).pipe($.rubySass({
+	gulp.task('styles', function() {
+		return gulp.src(_.app + '/styles/theme.scss').pipe($.rubySass({
 			loadPath: [_.app + '/scripts/vendor'],
 			require: ['sass-css-importer'],
 			style: 'expanded',
-			lineNumbers: true,
-			sourcemap: true,
 			compass: false, // only work's with sass (3.2.18) or earlier
-			trace: true
 		}).on('error', $.util.log))
 		.pipe($.autoprefixer('last 1 version', '> 1%', 'ie 8'))
-		.pipe(gulp.dest(_.dist))
+		.pipe(gulp.dest(_.app + '/styles'))
 		.pipe($.size())
 		.pipe($.notify({
 			message: '<%= options.date %> ✓ style: <%= file.relative %>',
@@ -177,13 +137,15 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| Inject bower components - (useref)
+	//| ✓ svg
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('bower', ['scripts', 'theme'], function() {
-		return gulp.src(_.app + '/*.html')
-		.pipe($.useref())
-		.pipe(gulp.dest(_.dist)).pipe($.notify({
-			message: '<%= options.date %> ✓ html: <%= file.relative %>',
+	gulp.task('svg', function() {
+		return gulp.src([
+			_.app + '/images/**/*.svg',
+			_.app + '/styles/**/*.svg'
+		]).pipe($.svgmin([{ removeDoctype: false }, { removeComments: false }]))
+		.pipe(gulp.dest(_.dist + '/images')).pipe($.size()).pipe($.notify({
+			message: '<%= options.date %> ✓ svg: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -191,7 +153,58 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| connect - (connect)
+	//| ✓ images
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('images', function() {
+		return gulp.src([
+			_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}'
+		]).pipe($.cache($.imagemin({
+			optimizationLevel: 3,
+			progressive: true,
+			interlaced: true
+		}))).pipe(gulp.dest(_.dist + '/images')).pipe($.size()).pipe($.notify({
+			message: '<%= options.date %> ✓ image: <%= file.relative %>',
+			templateOptions: {
+				date: new Date()
+			}
+		}));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ html
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('html', ['styles', 'scripts'], function() {
+		var js = $.filter('**/*.js'), css = $.filter('**/*.css');
+		return gulp.src(_.app + '/*.html')
+		.pipe($.useref.assets())
+		.pipe(js)
+		.pipe($.uglify())
+		.pipe(js.restore())
+		.pipe(css)
+		.pipe($.csso())
+		.pipe(css.restore())
+		.pipe($.useref.restore())
+		.pipe($.useref())
+		.pipe(gulp.dest(_.dist))
+		.pipe($.size());
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ bower (Inject Bower components)
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('wiredep', function() {
+		gulp.src(_.app + '/styles/*.{sass,scss}').pipe($.wiredep({
+			directory: _.app + '/scripts/vendor',
+			ignorePath: _.app + '/scripts/vendor/'
+		})).pipe(gulp.dest(_.app + '/styles'));
+		gulp.src(_.app + '/*.html').pipe($.wiredep({
+			directory: _.app + '/scripts/vendor',
+			ignorePath: _.app + '/'
+		})).pipe(gulp.dest(_.app));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ connect
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('connect', $.connect.server({
 		root: [_.app],
@@ -200,78 +213,84 @@
 	}));
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| watch - (watch)
+	//| ✓ server
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('watch', ['connect'], function() {
-		// Watch for changes in `app` dir
-		gulp.src([
-			_.app + '/*.css',
-			_.app + '/fonts/**/*',
-			_.app + '/scripts/**/*.js',
-			_.app + '/**/*.{png,jpg,jpeg,gif,ico}'
-		], { read: false }).pipe($.watch({}, function(files) {
-			return files;
-		})).pipe($.plumber());
-
-		// Watch .{scss,sass} files
-		$.watch({ glob: [_.app + '/**/*.{sass,scss}'] }, function() {
-			gulp.start('theme');
-		});
-
-		// Watch .js files
-		$.watch({ glob: [_.app + '/scripts/**/*.js'] }, function() {
-			gulp.start('require');
-		});
-
-		// Watch image files
-		$.watch({ glob: [_.app + '/**/*.{png,jpg,jpeg,gif,ico}'] }, function() {
-			gulp.start('images');
-		});
-
-		// Watch bower files
-		$.watch({ glob: [_.app + '/scripts/vendor/*'] }, function() {
-			gulp.start('bower');
-		});
-
-		// Launch localhost
+	gulp.task('server', ['connect', 'styles'], function() {
 		gulp.start('localhost');
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| build
+	//| ✓ watch
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('build', ['lint', 'mocha', 'bower', 'require', 'images'], function() {
-		// N/A yet.
+	gulp.task('watch', ['serve'], function() {
+		// Watch for changes in `app` dir
+		$.watch({ glob: [
+			_.app + '/*.html',
+			_.app + '/styles/**/*.{sass,scss}',
+			_.app + '/scripts/**/*.js',
+			_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}',
+			'!' + _.app + '/scripts/vendor/**/*.js'
+		] }, function(files) {
+			return files.pipe($.plumber()).pipe($.connect.reload());
+		});
+
+		// Watch style files
+		$.watch({ glob: [_.app + '/styles/**/*.{sass,scss}'] }, function() {
+			gulp.start('styles');
+		});
+
+		// Watch script files
+		$.watch({ glob: [_.app + '/scripts/**/*.js', '!' + _.app + '/scripts/vendor/**/*.js'] }, function() {
+			gulp.start('scripts');
+		});
+
+		// Watch image files
+		$.watch({ glob: [_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}'] }, function() {
+			gulp.start('images');
+		});
+
+		// Watch bower files
+		$.watch({ glob: 'bower.json' }, function() {
+			gulp.start('wiredep');
+		});
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| clean - (clean)
+	//| ✓ clean
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('clean', [], function() {
 		var stream = gulp.src([
-			_.dist + '/scripts',
 			_.dist + '/images',
-			_.dist + '/theme',
-			_.dist + '/fonts'
+			_.dist + '/scripts',
+			_.dist + '/styles'
 		], { read: false });
 		return stream.pipe($.clean());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| environ - (shelljs)
+	//| ✓ environ
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('localhost', [], function() {
+	gulp.task('localhost', function() {
 		$.shelljs.exec('open http://localhost:9000');
 	});
-	gulp.task('development', function() {
+	gulp.task('prod', function() {
 		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
 	});
-	gulp.task('staging', function() {
+	gulp.task('dev', function() {
+		$.shelljs.exec('open http://www.npmjs.org/package/generator-gulp-requirejs');
+	});
+	gulp.task('hml', function() {
 		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	//| alias
+	//| ✓ alias
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('test', ['jsonlint', 'jshint', 'mocha']);
+	gulp.task('build', ['test', 'html', 'images', 'svg']);
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ default
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('default', ['clean'], function() {
 		gulp.start('build');

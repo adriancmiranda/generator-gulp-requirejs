@@ -12,10 +12,10 @@
 	<meta name="description" content="">
 	<title><%= appname %></title>
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<!-- build:css theme.css -->
-	<link rel="stylesheet" href="theme.css">
+	<!-- build:css styles/theme.css -->
+	<link rel="stylesheet" href="styles/theme.css">
 	<!-- endbuild --><% if (includeModernizr) { %>
-	<!-- build:js scripts/vendor/modernizr.js -->
+	<!-- build:js scripts/header.js -->
 	<script src="scripts/vendor/modernizr/modernizr.js"></script>
 	<!-- endbuild --><% } %>
 </head>
@@ -23,18 +23,20 @@
 	<!--[if lt IE 10]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
+
 	<div class="hero-unit">
 		<h1>'Allo, 'Allo!</h1>
 		<p>You now have</p>
 		<ul>
 			<li>HTML5 Boilerplate</li>
-			<% if (includeModernizr) { %><li>Modernizr</li><% } %>
+			<% if (includeModernizr) { %>
+			<li>Modernizr</li>
+			<% } %>
 		</ul>
 	</div>
-	<!-- build:js scripts/app.min.js -->
-	<script src="scripts/vendor/requirejs/requirejs.js" data-main="scripts/config.js">
-		// libraries - scripts at the bottom for fast page loading
-	</script>
+
+	<!-- build:js scripts/body.js -->
+	<script src="scripts/vendor/requirejs/require.js" data-main="scripts/config.js"></script>
 	<!-- endbuild -->
 </body>
 </html>
