@@ -47,7 +47,7 @@ module.exports = GulpRequirejsGenerator = yeoman.generators.Base.extend({
 		};
 
 		this.prompt(prompts, function (props) {
-			var features = props.features;
+			var features = (props.features || []);
 			this.includeModernizr = this.hasFeature(features, 'includeModernizr');
 			done();
 		}.bind(this));
