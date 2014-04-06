@@ -206,7 +206,7 @@
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| ✓ connect
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('connect', $.connect.server({
+	gulp.task('server', $.connect.server({
 		root: [_.app],
 		livereload: true,
 		port: 9000
@@ -280,6 +280,9 @@
 		$.shelljs.exec('open http://www.npmjs.org/package/generator-gulp-requirejs');
 	});
 	gulp.task('hml', function() {
+		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
+	});
+	gulp.task('production', function() {
 		$.shelljs.exec('open https://www.npmjs.org/package/generator-gulp-requirejs');
 	});
 
