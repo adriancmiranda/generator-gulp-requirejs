@@ -22,7 +22,7 @@
 			this.log(this.yeoman);
 
 			// replace it with a short and sweet description of your generator
-			this.log(chalk.magenta('You\'re using the fantastic Gulp\\RequireJS generator.'));
+			this.log(chalk.magenta('You\'re using the fantastic', chalk.yellow('Gulp\\RequireJS generator') + chalk.magenta('.')));
 
 			var prompts = [
 				{
@@ -75,49 +75,49 @@
 		},
 
 		bower: function () {
-			this.log(chalk.magenta(' ✓ Bower:'));
+			this.log(chalk.green(' ✓', chalk.white('Bower')));
 			this.copy('_bower.json', 'bower.json');
 			this.copy('bower.rc', '.bowerrc');
 		},
 
 		ruby: function () {
-			this.log(chalk.magenta(' ✓ Ruby:'));
+			this.log(chalk.green('\n ✓', chalk.white('Ruby')));
 			this.copy('_config.rb', 'config.rb');
 		},
 
 		gulp: function () {
-			this.log(chalk.magenta(' ✓ Gulp:'));
+			this.log(chalk.green('\n ✓', chalk.white('Gulp')));
 			this.copy('_gulpfile.js', 'gulpfile.js');
 		},
 
 		npm: function () {
-			this.log(chalk.magenta(' ✓ NPM:'));
+			this.log(chalk.green('\n ✓', chalk.white('NPM')));
 			this.copy('_package.json', 'package.json');
 		},
 
 		editor: function () {
-			this.log(chalk.magenta(' ✓ Editor:'));
+			this.log(chalk.green('\n ✓', chalk.white('Editor')));
 			this.copy('editor.config', '.editorconfig');
 		},
 
 		git: function () {
-			this.log(chalk.magenta(' ✓ GIT:'));
+			this.log(chalk.green('\n ✓', chalk.white('GIT')));
 			this.copy('git.attributes', '.gitattributes');
 			this.copy('git.ignore', '.gitignore');
 		},
 
 		jshint: function () {
-			this.log(chalk.magenta(' ✓ JSHint:'));
+			this.log(chalk.green('\n ✓', chalk.white('JSHint')));
 			this.copy('jshint.rc', '.jshintrc');
 		},
 
 		jscs: function () {
-			this.log(chalk.magenta(' ✓ JSCS:'));
+			this.log(chalk.green('\n ✓', chalk.white('JSCS')));
 			this.copy('jscs.json', '.jscs.json');
 		},
 
 		requirejs: function () {
-			this.log(chalk.magenta(' ✓ RequireJS:'));
+			this.log(chalk.green('\n ✓', chalk.white('RequireJS')));
 			// app/scripts/helpers/
 			this.copy('app/scripts/helpers/polyfills.js', 'app/scripts/helpers/polyfills.js');
 			this.copy('app/scripts/helpers/utils.js', 'app/scripts/helpers/utils.js');
@@ -131,7 +131,7 @@
 		},
 
 		bem: function () {
-			this.log(chalk.magenta(' ✓ BEM:'));
+			this.log(chalk.green('\n ✓', chalk.white('BEM')));
 			// app/styles/base
 			this.copy('app/styles/base/_mixins.scss', 'app/styles/base/_mixins.scss');
 			this.copy('app/styles/base/_params.scss', 'app/styles/base/_params.scss');
@@ -159,7 +159,7 @@
 		},
 
 		h5bp: function () {
-			this.log(chalk.magenta(' ✓ H5BP:'));
+			this.log(chalk.green('\n ✓', chalk.white('H5BP')));
 			// app/
 			this.copy('app/404.html', 'app/404.html');
 			this.copy('app/favicon.ico', 'app/favicon.ico');
@@ -169,12 +169,11 @@
 		},
 
 		writeIndex: function () {
-			this.log(chalk.magenta(' ✓ Index:'));
 			this.copy('app/index.html', 'app/index.html');
 		},
 
 		mocha: function () {
-			this.log(chalk.magenta(' ✓ Mocha:'));
+			this.log(chalk.green('\n ✓', chalk.white('Mocha')));
 			// test/lib/mocha/
 			this.copy('test/lib/mocha/mocha.css', 'test/lib/mocha/mocha.css');
 			this.copy('test/lib/mocha/mocha.js', 'test/lib/mocha/mocha.js');
