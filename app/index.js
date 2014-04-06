@@ -41,7 +41,7 @@ module.exports = GulpRequirejsGenerator = yeoman.generators.Base.extend({
 				]
 			}
 		];
-		
+
 		this.hasFeature = function (list, feat) {
 			return list.indexOf(feat) !== -1;
 		};
@@ -64,7 +64,6 @@ module.exports = GulpRequirejsGenerator = yeoman.generators.Base.extend({
 
 		// styles
 		this.mkdir('app/styles/theme/base');
-		this.mkdir('app/styles/theme/images');
 		this.mkdir('app/styles/theme/layout');
 		this.mkdir('app/styles/theme/modules');
 		this.mkdir('app/styles/theme/states');
@@ -75,18 +74,18 @@ module.exports = GulpRequirejsGenerator = yeoman.generators.Base.extend({
 		this.mkdir('test/spec');
 
 		// essentials
-		this.copy('_gulpfile.js', 'gulpfile.js');
-		this.copy('_package.json', 'package.json');
 		this.copy('_bower.json', 'bower.json');
 		this.copy('_config.rb', 'config.rb');
+		this.copy('_gulpfile.js', 'gulpfile.js');
+		this.copy('_package.json', 'package.json');
 
 		// hidden files
 		this.copy('bower.rc', '.bowerrc');
-		this.copy('git.ignore', '.gitignore');
-		this.copy('git.attributes', '.gitattributes');
 		this.copy('editor.config', '.editorconfig');
-		this.copy('jshint.rc', '.jshintrc');
+		this.copy('git.attributes', '.gitattributes');
+		this.copy('git.ignore', '.gitignore');
 		this.copy('jscs.json', '.jscs.json');
+		this.copy('jshint.rc', '.jshintrc');
 	},
 
 	projectfiles: function () {
