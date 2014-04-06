@@ -222,7 +222,7 @@
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| ✓ watch
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('watch', ['serve'], function() {
+	gulp.task('watch', ['server'], function() {
 		// Watch for changes in `app` dir
 		$.watch({ glob: [
 			_.app + '/*.html',
