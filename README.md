@@ -54,4 +54,4 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## License
 
-MIT
+[MIT](https://github.com/adriancmiranda/generator-gulp-requirejs/blob/master/LICENSE)
