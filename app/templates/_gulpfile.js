@@ -193,11 +193,11 @@
 	//| ✓ bower (Inject Bower components)
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('wiredep', function() {
-		gulp.src(_.app + '/styles/*.{sass,scss}').pipe($.wiredep({
+		gulp.src(_.app + '/styles/*.{sass,scss}').pipe($.wiredep.stream({
 			directory: _.app + '/scripts/vendor',
 			ignorePath: _.app + '/scripts/vendor/'
 		})).pipe(gulp.dest(_.app + '/styles'));
-		gulp.src(_.app + '/*.html').pipe($.wiredep({
+		gulp.src(_.app + '/*.html').pipe($.wiredep.stream({
 			directory: _.app + '/scripts/vendor',
 			ignorePath: _.app + '/'
 		})).pipe(gulp.dest(_.app));
