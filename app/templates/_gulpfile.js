@@ -4,8 +4,7 @@
 	//|
 	//| Gulpfile
 	//|
-	//| This file is the streaming build system generated on <%= (new Date).toISOString().split('T')[0] %>
-	//| using <%= pkg.name %> <%= pkg.version %>
+	//| This file is the streaming build system
 	//|
 	//| .--------------------------------------------------------------.
 	//| | NAMING CONVENTIONS:                                          |
@@ -175,7 +174,7 @@
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('html', ['styles', 'scripts'], function() {
 		var js = $.filter('**/*.js'), css = $.filter('**/*.css');
-		return gulp.src(_.app + '/*.html')
+		return gulp.src([_.app + '/*.html'])
 		.pipe($.useref.assets())
 		.pipe(js)
 		.pipe($.uglify())
@@ -186,7 +185,13 @@
 		.pipe($.useref.restore())
 		.pipe($.useref())
 		.pipe(gulp.dest(_.dist))
-		.pipe($.size());
+		.pipe($.size())
+		.pipe($.notify({
+			message: '<%= options.date %> ✓ html: <%= file.relative %>',
+			templateOptions: {
+				date: new Date()
+			}
+		}));
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

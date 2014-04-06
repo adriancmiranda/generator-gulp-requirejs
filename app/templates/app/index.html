@@ -17,7 +17,12 @@
 	<!-- endbuild --><% if (includeModernizr) { %>
 	<!-- build:js scripts/header.js -->
 	<script src="scripts/vendor/modernizr/modernizr.js"></script>
-	<!-- endbuild --><% } %>
+	<!-- endbuild --><% } else { if (includeHTML5Shiv) { %>
+	<!--[if lt IE 9]>
+	<!-- build:js scripts/header.js -->
+	<script src="scripts/vendor/html5shiv/dist/html5shiv.js"></script>
+	<!-- endbuild -->
+	<![endif]--><% }} %>
 </head>
 <body>
 	<!--[if lt IE 10]>
@@ -31,7 +36,9 @@
 			<li>HTML5 Boilerplate</li>
 			<% if (includeModernizr) { %>
 			<li>Modernizr</li>
-			<% } %>
+			<% } else { if (includeHTML5Shiv) { %>
+			<li>HTML5 Shiv</li>
+			<% }} %>
 		</ul>
 	</div>
 

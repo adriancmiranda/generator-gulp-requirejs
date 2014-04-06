@@ -15,7 +15,12 @@
 			});
 		},
 
+		hasFeature: function (list, feat) {
+			return (list || []).indexOf(feat) !== -1;
+		},
+
 		askFor: function () {
+			var scope = this;
 			var done = this.async();
 
 			// have Yeoman greet the user
@@ -27,7 +32,7 @@
 			var prompts = [
 				{
 					type: 'checkbox',
-					name: 'features',
+					name: 'Features',
 					message: 'What more would you like?',
 					default: true,
 					choices: [
@@ -37,16 +42,21 @@
 							checked: true
 						}
 					]
+				},
+				{
+					type: 'confirm',
+					name: 'HTML5Shiv',
+					value: 'includeHTML5Shiv',
+					message: 'Would you like to use a crossbrowser workaround to ' + chalk.red('HTML5') + '?',
+					when: function (answers) {
+						return !scope.hasFeature(answers.Features, 'includeModernizr');
+					}
 				}
 			];
 
-			this.hasFeature = function (list, feat) {
-				return list.indexOf(feat) !== -1;
-			};
-
 			this.prompt(prompts, function (props) {
-				var features = (props.features || []);
-				this.includeModernizr = this.hasFeature(features, 'includeModernizr');
+				this.includeModernizr = this.hasFeature(props.Features, 'includeModernizr');
+				this.includeHTML5Shiv = props.HTML5Shiv;
 				done();
 			}.bind(this));
 		},
