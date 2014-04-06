@@ -63,11 +63,11 @@
 			this.mkdir('app/scripts/helpers');
 
 			// styles
-			this.mkdir('app/styles/theme/base');
-			this.mkdir('app/styles/theme/layout');
-			this.mkdir('app/styles/theme/modules');
-			this.mkdir('app/styles/theme/states');
-			this.mkdir('app/styles/theme/typography');
+			this.mkdir('app/styles/base');
+			this.mkdir('app/styles/layout');
+			this.mkdir('app/styles/modules');
+			this.mkdir('app/styles/states');
+			this.mkdir('app/styles/typography');
 
 			// test
 			this.mkdir('test/lib/mocha');
@@ -132,27 +132,27 @@
 
 		bem: function () {
 			this.log(chalk.magenta(' ✓ BEM:'));
-			// app/styles/theme/base
-			this.copy('app/styles/theme/base/_mixins.scss', 'app/styles/theme/base/_mixins.scss');
-			this.copy('app/styles/theme/base/_params.scss', 'app/styles/theme/base/_params.scss');
-			this.copy('app/styles/theme/base/_reset.scss', 'app/styles/theme/base/_reset.scss');
+			// app/styles/base
+			this.copy('app/styles/base/_mixins.scss', 'app/styles/base/_mixins.scss');
+			this.copy('app/styles/base/_params.scss', 'app/styles/base/_params.scss');
+			this.copy('app/styles/base/_reset.scss', 'app/styles/base/_reset.scss');
 
-			// app/styles/theme/layout
-			this.copy('app/styles/theme/layout/_core.scss', 'app/styles/theme/layout/_core.scss');
-			this.copy('app/styles/theme/layout/_footer.scss', 'app/styles/theme/layout/_footer.scss');
-			this.copy('app/styles/theme/layout/_header.scss', 'app/styles/theme/layout/_header.scss');
+			// app/styles/layout
+			this.copy('app/styles/layout/_core.scss', 'app/styles/layout/_core.scss');
+			this.copy('app/styles/layout/_footer.scss', 'app/styles/layout/_footer.scss');
+			this.copy('app/styles/layout/_header.scss', 'app/styles/layout/_header.scss');
 
-			// app/styles/theme/modules
-			this.copy('app/styles/theme/modules/_menu.scss', 'app/styles/theme/modules/_menu.scss');
+			// app/styles/modules
+			this.copy('app/styles/modules/_menu.scss', 'app/styles/modules/_menu.scss');
 
-			// app/styles/theme/states
-			this.copy('app/styles/theme/states/_breakpoints.scss', 'app/styles/theme/states/_breakpoints.scss');
+			// app/styles/states
+			this.copy('app/styles/states/_breakpoints.scss', 'app/styles/states/_breakpoints.scss');
 
-			// app/styles/theme/
-			this.copy('app/styles/theme/_base.scss', 'app/styles/theme/_base.scss');
-			this.copy('app/styles/theme/_layout.scss', 'app/styles/theme/_layout.scss');
-			this.copy('app/styles/theme/_modules.scss', 'app/styles/theme/_modules.scss');
-			this.copy('app/styles/theme/_states.scss', 'app/styles/theme/_states.scss');
+			// app/styles/
+			this.copy('app/styles/base.scss', 'app/styles/base.scss');
+			this.copy('app/styles/layout.scss', 'app/styles/layout.scss');
+			this.copy('app/styles/modules.scss', 'app/styles/modules.scss');
+			this.copy('app/styles/states.scss', 'app/styles/states.scss');
 
 			// app/styles/
 			this.copy('app/styles/theme.scss', 'app/styles/theme.scss');
