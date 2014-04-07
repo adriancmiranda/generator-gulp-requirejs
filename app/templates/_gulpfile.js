@@ -42,6 +42,7 @@
 			'.jshintrc',
 			'.jscs.json'
 		])
+		.pipe($.plumber())
 		.pipe($.jsonlint()).pipe($.jsonlint.reporter())
 		.pipe($.notify({
 			message: '<%= options.date %> ✓ lint: <%= file.relative %>',
@@ -61,6 +62,7 @@
 			'!' + _.app + '/scripts/vendor/**/*.js',
 			'test/spec/{,*/}*.js'
 		])
+		.pipe($.plumber())
 		.pipe($.jshint('.jshintrc')).pipe($.jshint.reporter('default'))
 		.pipe($.jscs())
 		.pipe($.notify({
@@ -75,7 +77,8 @@
 	//| ✓ mocha
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('mocha', function() {
-		return gulp.src('test/*.js').pipe($.mocha({ reporter: 'list' }));
+		return gulp.src('test/*.js').pipe($.plumber())
+		.pipe($.mocha({ reporter: 'list' }));
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,7 +94,9 @@
 			preserveLicenseComments: true,
 			useStrict: true,
 			wrap: true
-		}).pipe(gulp.dest(_.dist + '/scripts')).pipe($.size()).pipe($.notify({
+		})
+		.pipe($.plumber()).pipe(gulp.dest(_.dist + '/scripts')).pipe($.size())
+		.pipe($.notify({
 			message: '<%= options.date %> ✓ require: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
@@ -106,7 +111,7 @@
 		return gulp.src([
 			_.app + '/scripts/**/*.js',
 			'!' + _.app + '/scripts/vendor/**/*.js'
-		]).pipe($.size()).pipe($.notify({
+		]).pipe($.plumber()).pipe($.size()).pipe($.notify({
 			message: '<%= options.date %> ✓ script: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
@@ -120,10 +125,11 @@
 	gulp.task('styles', function() {
 		return gulp.src(_.app + '/styles/theme.scss').pipe($.rubySass({
 			loadPath: [_.app + '/scripts/vendor'],
-			require: ['sass-css-importer'],
+			require: ['sass-css-importer'], // @require https://github.com/chriseppstein/sass-css-importer
 			style: 'expanded',
-			compass: false, // only work's with sass (3.2.18) or earlier
-		}).on('error', $.util.log))
+			compass: false, // @deprecated only work's with sass (3.2.18) or earlier
+			noCache: false
+		}).on('error', $.util.log)).pipe($.plumber())
 		.pipe($.autoprefixer('last 1 version', '> 1%', 'ie 8'))
 		.pipe(gulp.dest(_.app + '/styles'))
 		.pipe($.size())
@@ -142,7 +148,9 @@
 		return gulp.src([
 			_.app + '/images/**/*.svg',
 			_.app + '/styles/**/*.svg'
-		]).pipe($.svgmin([{ removeDoctype: false }, { removeComments: false }]))
+		])
+		.pipe($.plumber())
+		.pipe($.svgmin([{ removeDoctype: false }, { removeComments: false }]))
 		.pipe(gulp.dest(_.dist + '/images')).pipe($.size()).pipe($.notify({
 			message: '<%= options.date %> ✓ svg: <%= file.relative %>',
 			templateOptions: {
@@ -155,9 +163,10 @@
 	//| ✓ images
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('images', function() {
+		gulp.src(_.app + '/*.{png,jpg,jpeg,gif,ico}').pipe(gulp.dest(_.dist));
 		return gulp.src([
 			_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}'
-		]).pipe($.cache($.imagemin({
+		]).pipe($.plumber()).pipe($.cache($.imagemin({
 			optimizationLevel: 3,
 			progressive: true,
 			interlaced: true
@@ -174,7 +183,8 @@
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 	gulp.task('html', ['styles', 'scripts'], function() {
 		var js = $.filter('**/*.js'), css = $.filter('**/*.css');
-		return gulp.src([_.app + '/*.html'])
+		gulp.src(_.app + '/*.txt').pipe(gulp.dest(_.dist));
+		return gulp.src([_.app + '/*.html']).pipe($.plumber())
 		.pipe($.useref.assets())
 		.pipe(js)
 		.pipe($.uglify())
@@ -230,7 +240,7 @@
 	gulp.task('watch', ['server'], function() {
 		// Watch for changes in `app` dir
 		$.watch({ glob: [
-			_.app + '/*.html',
+			_.app + '/*.{html,txt}',
 			_.app + '/styles/**/*.{sass,scss}',
 			_.app + '/scripts/**/*.js',
 			_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}',

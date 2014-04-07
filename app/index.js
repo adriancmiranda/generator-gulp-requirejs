@@ -172,6 +172,7 @@
 			this.log(chalk.green('\n ✓', chalk.white('H5BP')));
 			// app/
 			this.copy('app/404.html', 'app/404.html');
+			this.copy('app/images/cover.png', 'app/images/cover.png');
 			this.copy('app/favicon.ico', 'app/favicon.ico');
 			this.copy('app/ht.access', 'app/.htaccess');
 			this.copy('app/humans.txt', 'app/humans.txt');
