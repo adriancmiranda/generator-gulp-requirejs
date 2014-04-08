@@ -241,7 +241,7 @@
 		// Watch for changes in `app` dir
 		$.watch({ glob: [
 			_.app + '/*.{html,txt}',
-			_.app + '/styles/**/*.{sass,scss}',
+			_.app + '/styles/**/*.{sass,scss,css}',
 			_.app + '/scripts/**/*.js',
 			_.app + '/images/**/*.{png,jpg,jpeg,gif,ico}',
 			'!' + _.app + '/scripts/vendor/**/*.js'
