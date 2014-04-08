@@ -4,10 +4,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "requirejs": "~2.1.11",<% if (includeModernizr) { %>
-    "modernizr": "~2.6.2",<% } else { if (includeHTML5Shiv) { %>
-	"html5shiv": "~3.7.0",<% }} %>
-    "jquery": "~2.1.0"
+    "requirejs": "~2.1.11"<% if (hasFeat) { %>,<% } if (includeModernizr) { %>
+	"modernizr": "~2.6.2"<% if (includejQuery) {%>,<%}} else { if (includeHTML5Shiv) { %>
+	"html5shiv": "~3.7.0"<% if (includejQuery) {%>,<%}}} if (includejQuery) { %>
+	"jquery": "~2.1.0"<% } %>
   },
   "devDependencies": {},
   "ignore": [

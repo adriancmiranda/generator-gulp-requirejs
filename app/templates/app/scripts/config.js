@@ -25,8 +25,8 @@ require.config({
 	deps: ['application'],
 	waitSeconds: 45,
 	paths: {
-		requirejs: 'vendor/requirejs/require',
-		jquery: 'vendor/jquery/dist/jquery'
+		requirejs: 'vendor/requirejs/require'<% if (includejQuery) { %>,
+		jquery: 'vendor/jquery/dist/jquery'<% } %>
 	},
 	shim: {
 	}

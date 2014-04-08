@@ -40,6 +40,11 @@
 							name: 'Modernizr',
 							value: 'includeModernizr',
 							checked: true
+						},
+						{
+							name: 'jQuery',
+							value: 'includejQuery',
+							checked: true
 						}
 					]
 				},
@@ -55,8 +60,17 @@
 			];
 
 			this.prompt(prompts, function (props) {
+				// HTML features
 				this.includeModernizr = this.hasFeature(props.Features, 'includeModernizr');
 				this.includeHTML5Shiv = props.HTML5Shiv;
+				this.hasHTML5Feat = this.includeModernizr || this.includeHTML5Shiv;
+
+				// JS features
+				this.includejQuery = this.hasFeature(props.Features, 'includejQuery');
+				this.hasJSFeat = this.includejQuery;
+
+				// Features
+				this.hasFeat = this.hasHTML5Feat || this.hasJSFeat;
 				done();
 			}.bind(this));
 		},
