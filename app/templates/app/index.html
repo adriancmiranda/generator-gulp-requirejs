@@ -33,12 +33,10 @@
 		<h1>'Allo, 'Allo!</h1>
 		<p>You now have</p>
 		<ul>
-			<li>HTML5 Boilerplate</li>
-			<% if (includeModernizr) { %>
-			<li>Modernizr</li>
-			<% } else { if (includeHTML5Shiv) { %>
-			<li>HTML5 Shiv</li>
-			<% }} %>
+			<li>HTML5 Boilerplate</li><% if (includeModernizr) { %>
+			<li>Modernizr</li><% } else { if (includeHTML5Shiv) { %>
+			<li>HTML5 Shiv</li><% }} if (includejQuery) { %>
+			<li>jQuery</li><% } %>
 		</ul>
 	</div>
 
