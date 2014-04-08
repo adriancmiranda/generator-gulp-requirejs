@@ -39,7 +39,7 @@ $ yo gulp-requirejs
 
 ```bash
 $ npm uninstall -g generator-gulp-requirejs
-````
+```
 
 ```bash
 $ sudo rm -rf /usr/local/lib/node_modules/generator-gulp-requirejs
