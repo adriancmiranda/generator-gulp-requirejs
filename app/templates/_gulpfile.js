@@ -109,6 +109,14 @@
 			'!' + _.app + '/scripts/vendor/**/*.coffee'
 		])
 		.pipe($.plumber())
+		.pipe($.coffee({ bare: true }).on('error', $.util.log))
+		.pipe(gulp.dest(_.app + '/scripts'))
+		.pipe($.size()).pipe($.notify({
+			message: '<%= options.date %> ✓ scripts: <%= file.relative %>',
+			templateOptions: {
+				date: new Date()
+			}
+		}));
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

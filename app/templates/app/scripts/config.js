@@ -32,5 +32,3 @@ require.config({
 	shim: {
 	}
 });
-
-
