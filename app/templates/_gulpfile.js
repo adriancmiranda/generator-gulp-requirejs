@@ -45,7 +45,26 @@
 		.pipe($.plumber())
 		.pipe($.jsonlint()).pipe($.jsonlint.reporter())
 		.pipe($.notify({
-			message: '<%= options.date %> ✓ lint: <%= file.relative %>',
+			message: '<%= options.date %> ✓ jsonlint: <%= file.relative %>',
+			templateOptions: {
+				date: new Date()
+			}
+		}));
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ coffeelint
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('coffeelint', function() {
+		return gulp.src([
+			_.app + '/scripts/**/*.coffee',
+			'!' + _.app + '/scripts/vendor/**/*.coffee'
+		])
+		.pipe($.plumber())
+		.pipe($.coffeelint())
+		.pipe($.coffeelint.reporter())
+		.pipe($.notify({
+			message: '<%= options.date %> ✓ coffeelint: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -66,7 +85,7 @@
 		.pipe($.jshint('.jshintrc')).pipe($.jshint.reporter('default'))
 		.pipe($.jscs())
 		.pipe($.notify({
-			message: '<%= options.date %> ✓ hint: <%= file.relative %>',
+			message: '<%= options.date %> ✓ jshint: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -82,9 +101,20 @@
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//| ✓ coffee
+	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+	gulp.task('coffees', ['coffeelint'], function() {
+		return gulp.src([
+			_.app + '/scripts/**/*.coffee',
+			'!' + _.app + '/scripts/vendor/**/*.coffee'
+		])
+		.pipe($.plumber())
+	});
+
+	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| ✓ requirejs
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('requirejs', ['jshint'], function() {
+	gulp.task('requirejs', ['coffees', 'jshint'], function() {
 		$.requirejs({
 			baseUrl: _.app + '/scripts',
 			optimize: 'none',
@@ -97,7 +127,7 @@
 		})
 		.pipe($.plumber()).pipe(gulp.dest(_.dist + '/scripts')).pipe($.size())
 		.pipe($.notify({
-			message: '<%= options.date %> ✓ require: <%= file.relative %>',
+			message: '<%= options.date %> ✓ requirejs: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -107,12 +137,12 @@
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| ✓ scripts
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('scripts', ['jshint', 'requirejs'], function() {
+	gulp.task('scripts', ['requirejs'], function() {
 		return gulp.src([
 			_.app + '/scripts/**/*.js',
 			'!' + _.app + '/scripts/vendor/**/*.js'
 		]).pipe($.plumber()).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ script: <%= file.relative %>',
+			message: '<%= options.date %> ✓ scripts: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -134,7 +164,7 @@
 		.pipe(gulp.dest(_.app + '/styles'))
 		.pipe($.size())
 		.pipe($.notify({
-			message: '<%= options.date %> ✓ style: <%= file.relative %>',
+			message: '<%= options.date %> ✓ styles: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -171,7 +201,7 @@
 			progressive: true,
 			interlaced: true
 		}))).pipe(gulp.dest(_.dist + '/images')).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ image: <%= file.relative %>',
+			message: '<%= options.date %> ✓ images: <%= file.relative %>',
 			templateOptions: {
 				date: new Date()
 			}
@@ -301,7 +331,7 @@
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//| ✓ alias
 	//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-	gulp.task('test', ['jsonlint', 'jshint', 'mocha']);
+	gulp.task('test', ['jsonlint', 'coffeelint', 'jshint', 'mocha']);
 	gulp.task('build', ['test', 'html', 'images', 'svg']);
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

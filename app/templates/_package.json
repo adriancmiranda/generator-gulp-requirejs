@@ -14,6 +14,7 @@
 		"gulp-notify": "^1.2.1",
 		"gulp-mocha": "~0.4.1",
 		"gulp-jsonlint": "0.0.3",
+		"gulp-coffeelint": "~0.3.2",
 		"gulp-jshint": "~1.5.0",
 		"gulp-jscs": "^0.3.2",
 		"gulp-requirejs": "~0.1.3",
