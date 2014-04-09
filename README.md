@@ -9,7 +9,7 @@
 
 Trick question. It's not a thing. It's this guy:
 
-![](http://i.imgur.com/gPmrzZ9.png)
+![](http://i.imgur.com/5WrzgJT.png)
 
 Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
 
@@ -39,7 +39,7 @@ $ yo gulp-requirejs
 
 ```bash
 $ npm uninstall -g generator-gulp-requirejs
-````
+```
 
 ```bash
 $ sudo rm -rf /usr/local/lib/node_modules/generator-gulp-requirejs
