@@ -56,6 +56,15 @@
 					when: function (answers) {
 						return !scope.hasFeature(answers.Features, 'includeModernizr');
 					}
+				},
+				{
+					type: 'confirm',
+					name: 'Sizzle',
+					value: 'includeSizzle',
+					message: 'Would you like to use a pure-JavaScript CSS selector engine?',
+					when: function (answers) {
+						return !scope.hasFeature(answers.Features, 'includejQuery');
+					}
 				}
 			];
 
@@ -67,7 +76,8 @@
 
 				// JS features
 				this.includejQuery = this.hasFeature(props.Features, 'includejQuery');
-				this.hasJSFeat = this.includejQuery;
+				this.includeSizzle = props.Sizzle;
+				this.hasJSFeat = this.includejQuery || this.includeSizzle;
 
 				// Features
 				this.hasFeat = this.hasHTML5Feat || this.hasJSFeat;

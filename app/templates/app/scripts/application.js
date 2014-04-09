@@ -1,9 +1,11 @@
 /* global define */
 define([
 	'application/scope'<% if (includejQuery) { %>,
-	'jquery'<% } %>
-], function (scope<% if (includejQuery) { %>, $<% } %>) {
-	'use strict';
-	console.log('\'Allo \'Allo!', scope.id<% if (includejQuery) { %>, $.fn.jquery<% } %>);
+	'jquery'<% } else { if (includeSizzle) { %>,
+	'sizzle'<% }} %>
+], function (scope<% if (includejQuery || includeSizzle) { %>, $<% } %>) {
+	'use strict';<% if (includejQuery) { %>
+	console.log('\'Allo \'Allo!', scope.id, $.fn.jquery);<% } else { if (includeSizzle) { %>
+	console.log('\'Allo \'Allo!', scope.id, $);<% }} %>
 	return scope;
 });

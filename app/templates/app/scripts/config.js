@@ -26,8 +26,11 @@ require.config({
 	waitSeconds: 45,
 	paths: {
 		requirejs: 'vendor/requirejs/require'<% if (includejQuery) { %>,
-		jquery: 'vendor/jquery/dist/jquery'<% } %>
+		jquery: 'vendor/jquery/dist/jquery'<% } else { if (includeSizzle) { %>,
+		sizzle: 'vendor/sizzle/dist/sizzle'<% }} %>
 	},
 	shim: {
 	}
 });
+
+
