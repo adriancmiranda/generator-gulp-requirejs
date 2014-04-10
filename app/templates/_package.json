@@ -17,7 +17,6 @@
 		"gulp-coffeelint": "~0.3.2",
 		"gulp-jshint": "~1.5.0",
 		"gulp-jscs": "^0.3.2",
-		"gulp-if": "0.0.5",
 		"gulp-coffee": "~1.4.1",
 		"gulp-requirejs": "~0.1.3",
 		"gulp-ruby-sass": "^0.4.1",
