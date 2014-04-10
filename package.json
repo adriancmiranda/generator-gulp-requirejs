@@ -1,6 +1,6 @@
 {
   "name": "generator-gulp-requirejs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Scaffold out a front-end web app using RequireJS",
   "license": "MIT",
   "main": "app/index.js",
