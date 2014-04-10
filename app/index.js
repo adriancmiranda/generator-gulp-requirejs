@@ -114,11 +114,6 @@
 			this.copy('bower.rc', '.bowerrc');
 		},
 
-		ruby: function () {
-			this.log(chalk.green('\n ✓', chalk.white('Ruby')));
-			this.copy('_config.rb', 'config.rb');
-		},
-
 		gulp: function () {
 			this.log(chalk.green('\n ✓', chalk.white('Gulp')));
 			this.copy('_gulpfile.js', 'gulpfile.js');
