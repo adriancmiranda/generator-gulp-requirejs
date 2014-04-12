@@ -107,6 +107,10 @@
 			this.mkdir('test/lib/mocha');
 			this.mkdir('test/spec');
 		},
+		
+		work: function () {
+			this.copy('README.md', 'README.md');
+		}
 
 		bower: function () {
 			this.log(chalk.green(' ✓', chalk.white('Bower')));
@@ -190,7 +194,6 @@
 		h5bp: function () {
 			this.log(chalk.green('\n ✓', chalk.white('H5BP')));
 			// app/
-			this.copy('app/README.md', 'README.md');
 			this.copy('app/404.html', 'app/404.html');
 			this.copy('app/images/cover.png', 'app/images/cover.png');
 			this.copy('app/favicon.ico', 'app/favicon.ico');
