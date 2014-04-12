@@ -110,7 +110,7 @@
 		
 		work: function () {
 			this.copy('README.md', 'README.md');
-		}
+		},
 
 		bower: function () {
 			this.log(chalk.green(' ✓', chalk.white('Bower')));
