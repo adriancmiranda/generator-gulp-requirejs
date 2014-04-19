@@ -35,6 +35,10 @@
 		"wiredep": "~1.4.3",
 		"shelljs": "~0.2.6"
 	},
+	"repository":{
+		"type": "git",
+		"url": "http://github.com/adriancmiranda/generator-gulp-requirejs.git"
+	},
 	"engines": {
 		"node": ">=0.10.0"
 	}
