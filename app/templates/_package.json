@@ -1,7 +1,7 @@
 {
 	"author": "",
 	"name": "<%= _.slugify(appname) %>",
-	"description": "A requirejs webapp",
+	"description": "A Gulp RequireJS webapp",
 	"version": "0.0.0",
 	"license": "MIT",
 	"dependencies": {},
