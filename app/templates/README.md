@@ -1,5 +1,13 @@
 # <%= appname %>
 
+<!-- david dependencies -->
+[david_dependencies_status_image]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs.png?theme=shields.io
+[david_dependencies_status_url]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs "dependencies status"
+
+<!-- david devDependencies -->
+[david_devdependencies_status_image]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs/dev-status.png?theme=shields.io
+[david_devdependencies_status_url]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs#info=devDependencies "devDependencies status"
+
 ## Tasks
 
 * [gulp][gulp]
@@ -31,6 +39,7 @@
 * [wiredep][wiredep]
 * [shelljs][shelljs]
 
+<!-- Tasks -->
 [gulp]: http://npmjs.org/package/gulp
 [gulp-connect]: http://npmjs.org/package/gulp-connect
 [gulp-watch]: http://npmjs.org/package/gulp-watch
