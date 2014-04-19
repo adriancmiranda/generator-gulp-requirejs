@@ -1,4 +1,5 @@
 # <%= appname %>
+> A Gulp RequireJS webapp
 
 <!-- david dependencies -->
 [david_dependencies_status_image]: https://david-dm.org/adriancmiranda/generator-gulp-requirejs.png?theme=shields.io
