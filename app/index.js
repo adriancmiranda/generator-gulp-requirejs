@@ -139,6 +139,11 @@
 			this.copy('git.ignore', '.gitignore');
 		},
 
+		csslint: function () {
+			this.log(chalk.green('\n ✓', chalk.white('CSSLint')));
+			this.copy('csslint.rc', '.csslintrc');
+		},
+
 		jshint: function () {
 			this.log(chalk.green('\n ✓', chalk.white('JSHint')));
 			this.copy('jshint.rc', '.jshintrc');
