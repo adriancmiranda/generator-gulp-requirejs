@@ -16,7 +16,7 @@ var BackEndGenerator = new Proto(yogen.Base, {
 		this.super(args, options);
 		this.on('end', this.onEnd);
 		this.option('debug', { type:Boolean, desc:'debug', defaults:true });
-		this.argument('appname', { type:String, required:true });
+		this.argument('appname', { type:String, required:false, defaults:Utils.appname() });
 		this.appname = lodash.camelCase(this.appname);
 		this.pack = Utils.readJsonSync(path.join(__dirname, '../../package.json'));
 		if(this.options.debug){
