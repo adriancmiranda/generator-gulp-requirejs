@@ -8,8 +8,11 @@ describe('gulp-requirejs generator', function(){
   beforeEach(function(done){
     helpers.testDirectory(path.join(__dirname, 'temp'), function(err){
       if(err) return done(err);
-      var generator = ['../../generators/app'];
-      this.app = helpers.createGenerator('gulp-requirejs:app', generator);
+      this.app = helpers.createGenerator('gulp-requirejs:app', [
+      	'../../generators/app',
+      	'../../generators/front',
+      	'../../generators/back'
+      ]);
       done();
     }.bind(this));
   });
