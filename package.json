@@ -1,45 +1,67 @@
 {
   "name": "generator-gulp-requirejs",
-  "version": "0.0.7",
-  "description": "Scaffold out a front-end web app using RequireJS",
+  "main": "generators/app/index.js",
+  "version": "1.0.0",
   "license": "MIT",
-  "main": "app/index.js",
   "repository": "adriancmiranda/generator-gulp-requirejs",
+  "description": "Scaffold out a web app using RequireJS",
   "author": {
     "name": "Adrian C. Miranda",
     "email": "adriancmiranda@gmail.com",
     "url": "https://github.com/adriancmiranda"
   },
-  "engines": {
-    "node": ">=0.10.0",
-    "npm": ">=1.2.10"
+  "appDirs": {
+    "tasks": "tasks/",
+    "styles": "source/styles/",
+    "scripts": "source/scripts/",
+    "vendors": "source/scripts/vendors/",
+    "images": "source/media/",
+    "videos": "source/media/videos/",
+    "views": "source/views/",
+    "fonts": "source/fonts/",
+    "tests": "tests/"
   },
   "scripts": {
-    "test": "mocha"
+    "prestart": "npm install",
+    "start": "npm run prestart && gulp",
+    "test": "gulp test"
+  },
+  "dependencies": {
+    "Proto": "^1.0.0",
+    "bluebird": "^3.4.0",
+    "chalk": "^1.1.3",
+    "cheerio": "^0.20.0",
+    "fs-extra": "^0.30.0",
+    "lodash": "4.13.1",
+    "mkdirp": "^0.5.1",
+    "yeoman-generator": "0.20.3",
+    "yosay": "^1.1.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-jslint": "^1.0.1",
+    "gulp-mocha": "^2.2.0",
+    "load-gulp-config": "^1.0.1",
+    "temp": "^0.8.3"
   },
   "files": [
-    "app"
+    "generators/app",
+    "generators/front",
+    "generators/back"
   ],
   "keywords": [
     "yeoman-generator",
-    "web",
-    "app",
+    "scaffold",
     "front-end",
+    "back-end",
+    "fullstack",
     "requirejs",
     "modernizr",
+    "webapp",
     "jquery",
-    "gulp"
-  ],
-  "dependencies": {
-    "yeoman-generator": "~0.16.0",
-    "chalk": "~0.4.0"
-  },
-  "devDependencies": {
-    "mocha": "*"
-  },
-  "peerDependencies": {
-    "yo": ">=1.0.0",
-    "generator-mocha": ">=0.1.0",
-    "gulp": ">=3.5.0"
-  }
+    "gulp",
+    "web",
+    "app"
+  ]
 }

@@ -1,0 +1,11 @@
+--- 
+default:
+  - 'test'
+  - 'lint'
+
+lint:
+  - 'eslint'
+  - 'jslint'
+
+test:
+  - 'mocha'
