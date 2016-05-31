@@ -12,3 +12,7 @@ exports.readJsonSync = function(filepath, opts){
 exports.hasFeature = function(list, feature){
 	return !!~(Array.isArray(list)? list : []).indexOf(feature);
 };
+
+exports.appname = function(){
+	return path.basename(process.cwd()).replace(/[^\w\s]+?/g, ' ');
+};
