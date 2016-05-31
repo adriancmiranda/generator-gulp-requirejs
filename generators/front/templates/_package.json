@@ -1,6 +1,6 @@
 {
 	"author": "",
-	"name": "<%= _.slugify(appname) %>",
+	"name": "<%= appname %>",
 	"description": "A Gulp RequireJS webapp",
 	"version": "0.0.0",
 	"license": "MIT",

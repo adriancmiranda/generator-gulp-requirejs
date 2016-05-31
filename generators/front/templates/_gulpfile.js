@@ -43,13 +43,7 @@
 			'.jscs.json'
 		])
 		.pipe($.plumber())
-		.pipe($.jsonlint()).pipe($.jsonlint.reporter())
-		.pipe($.notify({
-			message: '<%= options.date %> ✓ jsonlint: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.jsonlint()).pipe($.jsonlint.reporter());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,13 +56,7 @@
 		])
 		.pipe($.plumber())
 		.pipe($.coffeelint())
-		.pipe($.coffeelint.reporter())
-		.pipe($.notify({
-			message: '<%= options.date %> ✓ coffeelint: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.coffeelint.reporter());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,13 +71,7 @@
 		])
 		.pipe($.plumber())
 		.pipe($.jshint('.jshintrc')).pipe($.jshint.reporter('default'))
-		.pipe($.jscs())
-		.pipe($.notify({
-			message: '<%= options.date %> ✓ jshint: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.jscs());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,12 +93,7 @@
 		.pipe($.plumber())
 		.pipe($.coffee({ bare: true }).on('error', $.util.log))
 		.pipe(gulp.dest(_.app + '/scripts'))
-		.pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ scripts: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,13 +110,7 @@
 			useStrict: true,
 			wrap: true
 		})
-		.pipe($.plumber()).pipe(gulp.dest(_.dist + '/scripts')).pipe($.size())
-		.pipe($.notify({
-			message: '<%= options.date %> ✓ requirejs: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.plumber()).pipe(gulp.dest(_.dist + '/scripts')).pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,12 +120,7 @@
 		return gulp.src([
 			_.app + '/scripts/**/*.js',
 			'!' + _.app + '/scripts/vendor/**/*.js'
-		]).pipe($.plumber()).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ scripts: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		]).pipe($.plumber()).pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -170,13 +136,7 @@
 		}).on('error', $.util.log)).pipe($.plumber())
 		.pipe($.autoprefixer('last 1 version', '> 1%', 'ie 8'))
 		.pipe(gulp.dest(_.app + '/styles'))
-		.pipe($.size())
-		.pipe($.notify({
-			message: '<%= options.date %> ✓ styles: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -189,12 +149,7 @@
 		])
 		.pipe($.plumber())
 		.pipe($.svgmin([{ removeDoctype: false }, { removeComments: false }]))
-		.pipe(gulp.dest(_.dist + '/images')).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ svg: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe(gulp.dest(_.dist + '/images')).pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -208,12 +163,7 @@
 			optimizationLevel: 3,
 			progressive: true,
 			interlaced: true
-		}))).pipe(gulp.dest(_.dist + '/images')).pipe($.size()).pipe($.notify({
-			message: '<%= options.date %> ✓ images: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		}))).pipe(gulp.dest(_.dist + '/images')).pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -233,13 +183,7 @@
 		.pipe($.useref.restore())
 		.pipe($.useref())
 		.pipe(gulp.dest(_.dist))
-		.pipe($.size())
-		.pipe($.notify({
-			message: '<%= options.date %> ✓ html: <%= file.relative %>',
-			templateOptions: {
-				date: new Date()
-			}
-		}));
+		.pipe($.size());
 	});
 
 	//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

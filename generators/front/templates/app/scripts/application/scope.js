@@ -2,7 +2,7 @@
 define([], function () {
 	'use strict';
 	var scope = window.APP = (window.APP || {});
-	scope.id = '<%= _.slugify(appname) %>';
+	scope.id = '<%= appname %>';
 	scope.libs = (scope.libs || {});
 	scope.views = (scope.views || {});
 	scope.models = (scope.models || {});
