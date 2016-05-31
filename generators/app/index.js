@@ -11,8 +11,7 @@ var Proto = require('Proto');
 var path = require('path');
 
 var FullStackGenerator = new Proto(yogen.Base, {
-	constructor:function(args, options){
-		this.super(args, options);
+	initializing:function(){
 		this.option('debug', { type:Boolean, desc:'debug', defaults:false });
 		this.argument('appname', { type:String, required:false, defaults:Utils.appname() });
 		this.appname = lodash.camelCase(this.appname);
