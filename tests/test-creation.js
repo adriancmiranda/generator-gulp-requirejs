@@ -3,6 +3,7 @@
 
 var path = require('path');
 var helpers = require('yeoman-generator').test;
+var Utils = require('../generators/utils');
 
 describe('gulp-requirejs generator', function(){
 	beforeEach(function(done){
